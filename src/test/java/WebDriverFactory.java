@@ -9,10 +9,10 @@ public class WebDriverFactory {
 
     public static WebDriver getDriver() {
         if (driver == null) {
-            // Ustawienie ścieżki do ChromeDriver
+
             System.setProperty("webdriver.chrome.driver", "c:/dev/driver2/chromedriver.exe");
 
-            // Inicjalizacja WebDrivera Chrome
+
             ChromeOptions options = new ChromeOptions();
             options.addArguments("--remote-allow-origins=*");
             driver = new ChromeDriver(options);
