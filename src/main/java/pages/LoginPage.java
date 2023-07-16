@@ -33,9 +33,6 @@ public class LoginPage {
     @FindBy(id = "Email-error")
     public WebElement emailError;
 
-    @FindBy(css = ".profile_info>h2")
-    public WebElement welcomeElement;
-
     @FindBy(css = "a[href*=Register]")
     public WebElement registerLnk;
 
@@ -49,6 +46,7 @@ public class LoginPage {
     public LoginPage typePassword(String password) {
         passwordTxt.clear();
         passwordTxt.sendKeys(password);
+
         return this;
     }
 

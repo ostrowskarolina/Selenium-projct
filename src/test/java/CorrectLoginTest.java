@@ -1,36 +1,27 @@
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.HomePage;
 import pages.LoginPage;
 
-public class CorrectLoginTest {
-    protected WebDriver driver;
+public class CorrectLoginTest extends BaseTest {
 
-    @BeforeClass
-    public void setup() {
-        driver = WebDriverFactory.getDriver();
-    }
+    @Test
+    public void correctLoginTest() {
 
-    @DataProvider
-    public Object[][] correctLoginData(){
-        return new Object[][]{
-                {"test@test.com", "Test1!"}
-        };
-    }
-
-    @Test(dataProvider = "correctLoginData")
-    public void correctLoginTest(String email, String password) {
+        String email = "test@test.com";
+        String password = "Test1!";
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.typeEmail(email);
         loginPage.typePassword(password);
-        loginPage.submitLogin();
+        HomePage homePage = loginPage.submitLogin();
 
-        Assert.assertTrue(loginPage.welcomeElement.isDisplayed());
-        Assert.assertTrue(loginPage.welcomeElement.getText().contains("Welcome"));
-
-        WebDriverFactory.quitDriver();
+        Assert.assertTrue(homePage.welcomeElm.isDisplayed());
+        Assert.assertTrue(homePage.welcomeElm.getText().contains("Welcome"));
     }
+
 }

@@ -13,7 +13,7 @@ public class ProcessPage extends HomePage {
     }
 
     @FindBy(css=".btn btn-success")
-    private WebElement addProcessBtn;
+    public WebElement addProcessBtn;
 
     @FindBy(css=".table table-striped jambo_table")
     public WebElement processesTable;

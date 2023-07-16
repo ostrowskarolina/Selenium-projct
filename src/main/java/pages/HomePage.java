@@ -41,7 +41,7 @@ public class HomePage {
     private WebElement processMenu;
 
     @FindBy(css="a[href$=Characteristics]")
-    private WebElement characterisicsMenu;
+    private WebElement characteristicsMenu;
 
     @FindBy(linkText = "Dashboard")
     private WebElement dashboardMenu;
@@ -57,30 +57,29 @@ public class HomePage {
         if (!isParentExpanded(workspaceNav)) {
             workspaceNav.click();
         }
-
         processMenu.click();
 
         return new ProcessPage(driver);
     }
-//
-//    public CharacteristicPage goToCharacteristics(){
-//        if (!isParentExpanded(workspaceNav)){
-//            workspaceNav.click();
-//        }
-//        processMenu.click();
-//
-//        return new CharacteristicPage(driver);
-//
-//    }
-//
-//    public DashboardsPage goToDashboards(){
-//        if (!isParentExpanded(homeNav)){
-//            homeNav.click();
-//        }
-//
-//        dashboardMenu.click();
-//
-//        return new DashboardsPage(driver);
-//    }
+
+    public CharacterPage goToCharacteristics(){
+        if (!isParentExpanded(workspaceNav)){
+            workspaceNav.click();
+        }
+        characteristicsMenu.click();
+
+        return new CharacterPage(driver);
+
+    }
+
+    public DashboardPage goToDashboard(){
+        if (!isParentExpanded(homeNav)){
+            homeNav.click();
+        }
+        dashboardMenu.click();
+
+        return new DashboardPage(driver);
+    }
+
 }
 

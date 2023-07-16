@@ -6,23 +6,18 @@ import org.testng.annotations.Test;
 import pages.CreateAccountPage;
 import pages.LoginPage;
 
-public class IncorrectRegistrationDifferentPasswordsTest {
-    protected WebDriver driver;
+import java.util.UUID;
 
-    @BeforeClass
-    public void setup() {
-        driver = WebDriverFactory.getDriver();
-    }
+public class IncorrectRegistrationDifferentPasswordsTest extends BaseTest {
 
-    @DataProvider
-    public Object[][] incorrectRegistrationData(){
-        return new Object[][]{
-                {"k@k.com", "Karolina1!", "Karolina2!", "The password and confirmation password do not match."}
-        };
-    }
+    @Test
+    public void incorrectRegistrationTest() {
 
-    @Test(dataProvider = "incorrectRegistrationData")
-    public void incorrectRegistrationTest(String email, String password, String confPassword, String expectedError) {
+        String randomString = UUID.randomUUID().toString().substring(0, 5);
+        String email = "user_" + randomString + "@mail.com";
+        String password = "Passwd1!";
+        String confPassword = "Passwd2!";
+        String expectedError = "The password and confirmation password do not match.";
 
         LoginPage loginPage = new LoginPage(driver);
         CreateAccountPage createAccountPage = loginPage.goToRegister();
@@ -32,7 +27,6 @@ public class IncorrectRegistrationDifferentPasswordsTest {
         createAccountPage.submitRegister();
 
         Assert.assertEquals(createAccountPage.confirmPasswordError.getText(), expectedError);
-
-        WebDriverFactory.quitDriver();
+        Assert.assertTrue(createAccountPage.confirmPasswordError.isDisplayed());
     }
 }
